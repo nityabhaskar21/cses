@@ -14,16 +14,16 @@ package SampleCsesSubmission;
 
 public class JavaSumbission {
     public static void main(String[] args) {
-        IO io = new IO();
+        // IO io = new IO();
         
-        String a = io.next(); // Reads the next string separated by spaces.
-        int b = io.nextInt(); // Reads the next int separated by spaces.
-        long c = io.nextLong(); // Reads the next long separated by spaces.
-        double d = io.nextDouble(); // Reads the next double separated by spaces.
+        // String a = io.next(); // Reads the next string separated by spaces.
+        // int b = io.nextInt(); // Reads the next int separated by spaces.
+        // long c = io.nextLong(); // Reads the next long separated by spaces.
+        // double d = io.nextDouble(); // Reads the next double separated by spaces.
         
-        // Works like System.out.println.
-        io.println("Input was " + a + " " + b + " " + c + " " + d);
+        // // Works like System.out.println.
+        // io.println("Input was " + a + " " + b + " " + c + " " + d);
         
-        io.close(); // MUST BE CALLED IN THE END, otherwise some of the output may be missing
+        // io.close(); // MUST BE CALLED IN THE END, otherwise some of the output may be missing
     }
     }

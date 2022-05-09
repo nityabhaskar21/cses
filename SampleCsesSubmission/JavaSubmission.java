@@ -12,18 +12,22 @@ package SampleCsesSubmission;
 // It doesn't need to be imported as it resides in the same directory as the program. 
 // You can use IO class as follows:
 
-public class JavaSumbission {
+public class JavaSubmission {
     public static void main(String[] args) {
-        // IO io = new IO();
+        /*
         
-        // String a = io.next(); // Reads the next string separated by spaces.
-        // int b = io.nextInt(); // Reads the next int separated by spaces.
-        // long c = io.nextLong(); // Reads the next long separated by spaces.
-        // double d = io.nextDouble(); // Reads the next double separated by spaces.
+        IO io = new IO();
         
-        // // Works like System.out.println.
-        // io.println("Input was " + a + " " + b + " " + c + " " + d);
+        String a = io.next(); // Reads the next string separated by spaces.
+        int b = io.nextInt(); // Reads the next int separated by spaces.
+        long c = io.nextLong(); // Reads the next long separated by spaces.
+        double d = io.nextDouble(); // Reads the next double separated by spaces.
         
-        // io.close(); // MUST BE CALLED IN THE END, otherwise some of the output may be missing
+        // Works like System.out.println.
+        io.println("Input was " + a + " " + b + " " + c + " " + d);
+        
+        io.close(); // MUST BE CALLED IN THE END, otherwise some of the output may be missing
+        
+        */
     }
     }

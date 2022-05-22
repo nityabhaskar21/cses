@@ -50,22 +50,27 @@ public class Main {
     }
 
     public static boolean two_sets(List<Integer> arr, int size, int sum) {
-        if (m[size][sum] != null) {
-            return m[size][sum];
+
+        for (int j = 0; j <= sum; j++) {
+            m[0][j] = false;
         }
-        if (arr.size() == 0 || sum == 0) {
-            m[size][sum] = true;
-            return m[size][sum];
+        for (int i = 0; i <= size; i++) {
+            m[i][0] = true;
         }
-        else if (arr.get(size - 1) <= sum)  {
-            m[size][sum] =  two_sets(arr, size-1, sum-arr.get(size - 1)) || 
-            two_sets(arr, size-1, sum);
-            return m[size][sum];
+
+        for (int i = 1; i <= size; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (arr.get(i - 1) <= j)  {
+                    m[i][j] = m[i-1][j-arr.get(i - 1)]|| 
+                    m[i-1][j] ;
+                }
+                else {
+                    m[i][j] = m[i-1][j] ;
+                }
+            }
         }
-        else {
-            m[size][sum] = two_sets(arr, size-1, sum);
-            return m[size][sum];
-        }
+        return m[size][sum];
+        
     }
 
 }

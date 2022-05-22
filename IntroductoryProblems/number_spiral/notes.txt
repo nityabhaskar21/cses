@@ -1,0 +1,25 @@
+1  2  9  10 25
+4  3  8  11 24
+5  6  7  12 23
+16 15 14 13 22
+17 18 19 20 21
+
+Lets first check for diagonal elements
+
+n = 1 , row = 1 , column = 1, diagonal_element = 1     1*1 - 0
+n = 2 , row = 2 , column = 2, diagonal_element = 3     2*2 - 1
+n = 3 , row = 3 , column = 3, diagonal_element = 7     3*3 - 2
+n = 4 , row = 4 , column = 4, diagonal_element = 13    4*4 - 3
+n = 5 , row = 5 , column = 5, diagonal_element = 21    5*5 - 4   i.e. n*n - (n-1)
+
+Case 1: when row > cloumn
+    Case 1.1: when row no. is even 
+        element[row][column] = row*row - (row-1) + (row - column)
+    Case 1.2: when row no. is odd 
+        element[row][column] = row*row - (row-1) - (row - column)
+
+Case 2: when row < cloumn
+    Case 2.1: when column no. is even 
+        element[row][column] = column*column - (column-1) - (column - row)
+    Case 2.2: when row no. is odd 
+        element[row][column] = column*column - (column-1) + (column - row)

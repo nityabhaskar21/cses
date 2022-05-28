@@ -58,10 +58,37 @@ int main()
 {
     fast_cin();
 
-    #ifndef ONLINE_JUDGE
-       freopen("input.txt", "r", stdin);
-       freopen("output.txt", "w", stdout);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //    freopen("input.txt", "r", stdin);
+    //    freopen("output.txt", "w", stdout);
+    // #endif
+    long n = 0;
+    cin>>n;
+    ll x,y;
+    for (int i=0; i<n; i++) {
+        cin >> x;
+        cin >> y;
+
+        if (x == y) {
+            cout<< x*x - (x-1)<<endl;
+        }
+
+        else if (x > y) {
+            if (x%2 == 0) {
+                cout<<x*x - (x-1) + (x - y)<<endl;
+            } else {
+                cout<<x*x - (x-1) - (x - y)<<endl;
+            }
+        }
+        else {
+            if (y%2 == 0) {
+                cout<<y*y - (y-1) - (y-x)<<endl;
+            } else {
+                cout<<y*y - (y-1) + (y-x)<<endl;
+            }
+        }
+
+    }
 
     return 0;
 }

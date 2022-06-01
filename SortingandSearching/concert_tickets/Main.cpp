@@ -66,7 +66,7 @@ int main()
     long no_people = 0;
     cin>>no_tickets>>no_people;
 
-    v64 tickets, people;
+    v64 tickets, people, answer;
 
     int i = 0;
     ll e = 0;
@@ -82,9 +82,34 @@ int main()
         people.pb(e);
         i++;
     }
-
+ 
     sort(tickets.begin(), tickets.end());
 
+    for (int i = 0; i < people.size(); i++) {
+        int j = 0;
+        for (j = 0; j < tickets.size(); j++) {
+            if (people[i] > tickets[j]) break;
+        }
+        if (tickets.size() == 0) {
+            people.push_back(-1);
+            break;
+        }
+        for (auto it = tickets.begin(); it != tickets.end(); ++it) {
+            if (*it > people[i] && it != tickets.begin()) {
+                answer.push_back(*(it-1));
+                tickets.erase(it-1);
+                break;
+            }
+            else if (*it > people[i] && it == tickets.begin()) {
+                answer.push_back(-1);
+                break;
+            }
+        }
+        
+    }
+    for(int i = 0; i < answer.size(); i++) {
+        cout<<answer.at(i)<<endl;
+    }
 
     return 0;
 }

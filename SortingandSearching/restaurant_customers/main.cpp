@@ -77,8 +77,8 @@ int main()
     ll min_in_time = timing_list.front().first;
     ll max_in_time = timing_list.back().first;
 
-    ll curr_in_time = 0;
-    ll curr_out_time = 0;
+    ll curr_in_time = timing_list.front().first;
+    ll curr_out_time = timing_list.back().second;
 
     long max_customers = LONG_MIN;
 

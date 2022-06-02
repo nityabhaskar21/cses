@@ -21,7 +21,8 @@ If a customer cannot get any ticket, print −1.
 Constraints
 1≤n,m≤2⋅10^5
 1≤hi,ti≤10^9
-Example
+
+Example 1
 
 Input:
 5 3
@@ -31,4 +32,16 @@ Input:
 Output:
 3
 8
+-1
+
+
+Example 2
+
+Input:
+1 2
+1
+10 10
+
+Output:
+1
 -1

@@ -85,29 +85,41 @@ int main()
  
     sort(tickets.begin(), tickets.end());
 
-    for (int i = 0; i < people.size(); i++) {
-        int j = 0;
-        for (j = 0; j < tickets.size(); j++) {
-            if (people[i] > tickets[j]) break;
-        }
-        if (tickets.size() == 0) {
+    for (size_t  i = 0; i < people.size(); i++) {
+        cout<<"* "<<*tickets.begin()<<endl;
+        if (tickets.empty()) {
             people.push_back(-1);
             break;
         }
         for (auto it = tickets.begin(); it != tickets.end(); ++it) {
-            if (*it > people[i] && it != tickets.begin()) {
+            if (*it == people[i] ) {
+                answer.push_back(*it);
+                tickets.erase(it);
+                break;
+            }
+            else if (*it > people[i] && it != tickets.begin()) {
                 answer.push_back(*(it-1));
                 tickets.erase(it-1);
                 break;
             }
             else if (*it > people[i] && it == tickets.begin()) {
+                cout<<"tersting";
                 answer.push_back(-1);
                 break;
             }
+
+            else if (it == (tickets.end() - 1) && *it < people[i]) {
+                answer.push_back(*it);
+                tickets.erase(it);
+                break;
+            }
         }
+
+        
         
     }
-    for(int i = 0; i < answer.size(); i++) {
+
+    for(size_t i = 0; i < answer.size(); i++) {
         cout<<answer.at(i)<<endl;
     }
 

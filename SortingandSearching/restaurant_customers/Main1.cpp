@@ -51,6 +51,7 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
+ // ACCEPTED
 
 int main()
 {
@@ -75,7 +76,7 @@ int main()
     long max_customers = LONG_MIN;
     long curr_max = 0;
 
-    for (int i = 0; i <no_customers; i++) {
+    for (int i = 0; i < timing_list.size(); i++) {
         if (timing_list.at(i).second == 1) {
             curr_max++;
             max_customers = max(max_customers, curr_max);

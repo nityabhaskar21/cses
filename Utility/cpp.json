@@ -56,8 +56,6 @@
           "#define sz(x) ((ll)(x).size())",
           " ",
           "",
-          "void solve(){",
-          "}",
           "int main()",
           "{",
 		  "    fast_cin();",

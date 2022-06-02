@@ -74,8 +74,11 @@ int main()
 
     sort(timing_list.begin(), timing_list.end());
 
-    ll min_time = timing_list.front().first;
-    ll min_time = timing_list.back().first;
+    ll min_in_time = timing_list.front().first;
+    ll max_in_time = timing_list.back().first;
+
+    ll curr_in_time = 0;
+    ll curr_out_time = 0;
 
     long max_customers = LONG_MIN;
 

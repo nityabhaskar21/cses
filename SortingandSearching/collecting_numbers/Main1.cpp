@@ -19,7 +19,7 @@
 #include <stack>
 #include <iomanip>
 #include <fstream>
-  
+ 
 using namespace std;
  
 typedef long long ll;
@@ -50,7 +50,8 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+
+// ACCEPTED
 
 int main()
 {
@@ -60,36 +61,31 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
-
     long size = 0;
     cin>>size;
 
     vector<p64> numbers;
     ll e = 0;
-    for(int i=0; i<size; i++) {
+    for(long i=0; i<size; i++) {
         cin>>e;
         numbers.push_back(make_pair(e, i));
     }
 
-    sort(numbers.rbegin(), numbers.rend());
-    // cout<<numbers.at(0).first;
+    long rounds = 1;
 
-    long good_index = numbers.size()-1;
-    long max_rounds = numbers.size()-1;
+    sort(numbers.begin(), numbers.end());
 
-    for(int i=0; i<size-1; i++) {
-        if (numbers[i].second < good_index) {
-            max_rounds--;
-        } else if (numbers[i].second == good_index) {
-            cout<<numbers[i].first<<endl;
-            good_index--;
+    long curr_index = 0;
+
+    for(long i = 0; i < size; i++) {
+        if(numbers[i].second < curr_index) {
+            rounds++;
         }
-        else {
-            good_index--;
-        }
+        curr_index = numbers[i].second;
     }
 
-    cout<<max_rounds;
+    cout<<rounds;
+
 
     return 0;
 }

@@ -13,7 +13,7 @@ The next line has n integers x1,x2,…,xn: the numbers in the array.
 Output
 
 Print one integer: the number of rounds.
-
+ 
 Constraints
 1≤n≤2⋅10^5
 

@@ -51,16 +51,31 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+//  ACCEPTED
 
 int main()
 {
     fast_cin();
 
-    #ifndef ONLINE_JUDGE
-       freopen("input.txt", "r", stdin);
-       freopen("output.txt", "w", stdout);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //    freopen("input.txt", "r", stdin);
+    //    freopen("output.txt", "w", stdout);
+    // #endif
+
+    long n = 0;
+    cin>>n;
+
+    v64 combinations(n+1, 0);
+    combinations[0] = 1;
+    for (long i = 1; i <= n; i++) {
+        for (int j = 1; j<=6; j++) {
+            if (i>=j) {
+                combinations[i] = (combinations[i] + combinations[i-j])%MOD_INT;
+            }
+        }
+    }
+    cout<<combinations[n];
+
 
     return 0;
 }

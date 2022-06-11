@@ -9,7 +9,7 @@ The first input line has two integers n and x: the number of coins and the desir
 
 The second line has n distinct integers c1,c2,…,cn: the value of each coin.
 
-Output
+Output 
 
 Print one integer: the minimum number of coins. If it is not possible to produce the desired sum, print −1.
 

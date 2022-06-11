@@ -50,33 +50,9 @@ double eps = 1e-12;
 #define INF 2e18
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
-#define sz(x) ((ll)(x).size())
+#define sz(x) ((l;l)(x).size())
  
-map<long, long> values ;
-
-long find_min_coins(long x, v64 coins) {
-
-    if (values.find(x) != values.end()) {
-        return values.at(x);
-    }
- 
-    else if (x <= 0) {
-        return LONG_MAX;
-    }
-
-    else if (count(coins.begin(), coins.end(), x)) {
-        return values[x] = 1;
-    }
-
-    else {
-        long min_coins = LONG_MAX;
-        for (int i = 0; i < coins.size(); i++) {
-            min_coins = min(1+find_min_coins(x-coins[i], coins), min_coins);
-        }
-        return values[x] = min_coins;
-    }
-}
-
+//ACCEPTED
 int main()
 {
     fast_cin();
@@ -85,7 +61,6 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
-
     int n = 0;
     long x = 0;
     cin>>n>>x;
@@ -97,14 +72,19 @@ int main()
         coins.pb(e);
     }
 
-    long answer = find_min_coins(x, coins);
+    v64 t(x+1, INT_MAX);
 
-    // for (auto it = values.begin(); it != values.end(); it++) {
-    //     cout<<(*it).first <<" " <<(*it).second;
-    // }
+    t.at(0) = 0;
 
-    cout<<answer;
+    for (long i = 1; i <= x; i++) {
+        for (int j = 0; j < n; j++) {
+            if (coins.at(j) <= i) {
+                t.at(i) = min (t.at(i-coins.at(j))+1, t.at(i));
+            }
+        }
+    }
+
+    cout<<(t.at(x) != INT_MAX ? t.at(x): -1);
 
     return 0;
 }
-

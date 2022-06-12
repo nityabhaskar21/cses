@@ -1,0 +1,19 @@
+Why use 
+
+1≤n≤1000
+1≤x≤10^5
+
+vector<vector<int>> t(n+1, vector<int>(x+1, 0)) instead of vector<vector<int>> t(x+1, vector<int>(n+1, 0)) ???
+
+https://stackoverflow.com/questions/16699247/what-is-a-cache-friendly-code
+
+
+for (i = 0 to size)
+  for (j = 0 to size)
+    do something with ary[i][j]
+
+will run faster than the following:
+
+for (i = 0 to size)
+  for (j = 0 to size)
+    do something with ary[j][i]    

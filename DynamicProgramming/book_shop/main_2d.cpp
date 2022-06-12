@@ -81,18 +81,29 @@ int main()
         // cin>>pages[i];
     }
 
-    vector<vector<int>> t(x+1, vector<int>(n+1, 0));
+    // vector<vector<int>> t(x+1, vector<int>(n+1, 0));
   
-    for (int i = 1; i <= x; i++) {
-        for (int j = 1; j <= n; j++) {
-            t[i][j] = t[i][j-1];
-            if (price[j-1] <=i) {
-                t[i][j] = max(t[i][j-1], pages[j-1] + t[i-price[j-1]][j-1]);
+    // for (int i = 1; i <= x; i++) {
+    //     for (int j = 1; j <= n; j++) {
+    //         t[i][j] = t[i][j-1];
+    //         if (price[j-1] <=i) {
+    //             t[i][j] = max(t[i][j-1], pages[j-1] + t[i-price[j-1]][j-1]);
+    //         }
+    //     }
+    // }
+
+    vector<vector<int>> t(n+1, vector<int>(x+1, 0));
+  
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= x; j++) {
+            t[i][j] = t[i-1][j];
+            if (price[i-1] <=j) {
+                t[i][j] = max(t[i-1][j], pages[i-1] + t[i-1][j-price[i-1]]);
             }
         }
     }
 
-    printf("%d", t[x][n]);
+    printf("%d", t[n][x]);
 
     return 0;
 }

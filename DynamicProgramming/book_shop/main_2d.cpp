@@ -56,7 +56,7 @@ using namespace std;
 
 int main()
 {
-    fast_cin();
+    // fast_cin();
 
     // #ifndef ONLINE_JUDGE
     //    freopen("input.txt", "r", stdin);
@@ -64,24 +64,27 @@ int main()
     // #endif
     int n;
     int x;
-    cin>>n>>x;
+  
+    scanf("%d%d",&n,&x);
 
     vector<int> price(n);
     vector<int> pages(n);
 
     int temp;
     for (int i = 0; i < n; i++) {
-        cin>>price[i];;
+        scanf("%d",&price[i]);
+        // cin>>price[i];
     }
 
     for (int i = 0; i < n; i++) {
-        cin>>pages[i];;
+        scanf("%d",&pages[i]);
+        // cin>>pages[i];
     }
 
     vector<vector<int>> t(x+1, vector<int>(n+1, 0));
   
-    for (int j = 1; j <= n; j++) {
-        for (int i = 1; i <= x; i++) {
+    for (int i = 1; i <= x; i++) {
+        for (int j = 1; j <= n; j++) {
             t[i][j] = t[i][j-1];
             if (price[j-1] <=i) {
                 t[i][j] = max(t[i][j-1], pages[j-1] + t[i-price[j-1]][j-1]);
@@ -89,7 +92,7 @@ int main()
         }
     }
 
-    cout<<t[x][n];
+    printf("%d", t[x][n]);
 
     return 0;
 }

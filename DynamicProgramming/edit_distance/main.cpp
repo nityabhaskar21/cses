@@ -91,6 +91,13 @@ int main()
     //     }
     //     cout<<endl;
     // }
+    int short_length = min(s1.size(), s2.size());
+    int long_length = max(s1.size(), s2.size());
+
+    int answer = 0;
+
+    answer = (long_length - short_length) + (short_length - t[s1.size()][s2.size()]);
+    cout<<answer;
 
     return 0;
 }

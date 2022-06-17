@@ -9,7 +9,7 @@ Input
 The first input line contains an integer n: the size of the list.
 
 The next line has n integers x1,x2,…,xn: the contents of the list.
-
+ 
 Output
 
 Print the maximum possible score for the first player.

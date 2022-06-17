@@ -61,6 +61,15 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
+    int n = 0;
+    cin >> n;
+
+    v64 input(n);
+    for (int i = 0; i < n; i++) {
+        cin >> input[i];
+    }
+
+    
 
     return 0;
 }

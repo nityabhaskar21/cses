@@ -51,6 +51,25 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
+static vector<int> result;
+
+void money_sums(vector<int>& in, vector<int> out, int i) {
+    if (i >= in.size()){
+        int sum = 0;
+        for (int j = 0; j < out.size(); j++) {
+            sum += out[j];
+        }
+        if (sum > 0) {
+            result.push_back(sum);
+        }
+   
+        return;
+    }
+    money_sums(in, out, i+1);
+    out.push_back(in.at(i));
+    money_sums(in, out, i+1);
+}
  
 
 int main()
@@ -61,37 +80,30 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
+    int n = 0;
+    cin>>n;
 
-    int a, b;
-    cin>>a>>b;
+    vector<int> values(n);
 
-    vector<vector<int>> t(a+1, vector<int>(b+1, 0));
+    for(int i=0; i<n; i++) {
+        cin>>values[i];
+    }
+    vector<int> out;
 
-    for (int i=0; i<=a; i++) {
-        for (int j=0; j<=b; j++) {
-            int small_side = min(i, j);
-            int big_size = max(i, j);
-            if (i == 0 || j == 0) {
-                t[i][j] = 0;
-            }
+    money_sums(values, out, 0);
 
-            else if (i == j) {
-                t[i][j] = 0;
-            }
-
-            else if (big_size-small_side == small_side) {
-                t[i][j] = 1;
-            }
-            else if (i > j){
-                t[i][j] = 1 + t[i-j][j];
-            }
-            else {
-                t[i][j] = 1 + t[i][j-i];
-            }
-        }
+    sort(result.begin(), result.end());
+ 
+    set<int> resultSet;
+    for(int i=0; i<result.size(); i++) {
+        resultSet.insert(result[i]);
     }
 
-    cout<<t[a][b];
+    cout<<resultSet.size()<<endl;
+    for (auto i=resultSet.begin(); i!=resultSet.end(); i++) {
+        cout<<*i<<" ";
+    }
+ 
 
     return 0;
 }

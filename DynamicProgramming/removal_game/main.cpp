@@ -51,8 +51,9 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
 
+// ACCEPTED
+ 
 int main()
 {
     fast_cin();
@@ -68,6 +69,37 @@ int main()
     for (int i = 0; i < n; i++) {
         cin >> input[i];
     }
+
+    vector<vector<ll>> t(n, vector<ll>(n, 0));
+
+    for (int i = n-1; i >= 0; i--) {
+        for (int j = 0; j < n; j++) {
+            if (i > j) {
+                continue;
+             }
+            else if (i == j) {
+                t[i][j] = 1;
+            }
+            
+            else if (j-i==1) {
+                t[i][j] = max(input[i], input[j]);
+            }
+
+            else {
+                t[i][j] = max(input[i] + min(t[i+1][j-1], t[i+2][j]), input[j] + min(t[i][j-2], t[i+1][j-1]));
+            }
+        }
+
+    }
+
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j < n; j++) {
+    //         cout << t[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    cout<<t[0][n-1];
 
     
 

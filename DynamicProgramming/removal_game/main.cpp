@@ -78,7 +78,7 @@ int main()
                 continue;
              }
             else if (i == j) {
-                t[i][j] = 1;
+                t[i][j] = input[i];
             }
             
             else if (j-i==1) {
@@ -92,14 +92,14 @@ int main()
 
     }
 
-    // for (int i = 0; i < n; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         cout << t[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << t[i][j] << " ";
+        }
+        cout << endl;
+    }
 
-    cout<<t[0][n-1];
+    // cout<<t[0][n-1];
 
     
 

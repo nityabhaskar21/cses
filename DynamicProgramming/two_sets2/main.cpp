@@ -65,5 +65,44 @@ int main()
     int n;
     cin >> n;
 
+    if (n*(n+1)/2 %2 != 0) {
+        cout<<0;
+        return 0;
+    }
+
+    ll half_sum = n*(n+1)/4;
+
+    vector<vector<ll>> t(n+1, vector<ll>(half_sum+1, 0)); 
+
+    for (int i=0; i<=n; i++) {
+        for (int j=0; j<=half_sum; j++) {
+            if (i == 0) {
+                t[i][j] = 0;
+            }
+            if (j == 0) {
+                t[i][j] = 1;
+            }
+        }
+    }
+
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=half_sum; j++) {
+            if (i > j) {
+                t[i][j] = t[i-1][j] ;
+            } else {
+                t[i][j] = ((t[i-1][j] + t[i-1][j-i]) ) % MOD_INT;   
+            } 
+
+        }
+
+    }  
+
+    // ( (a%M) * (b^(-1)%M) ) %M
+    cout<<((t[n][half_sum] % MOD_INT ) * (500000004% MOD_INT)) % MOD_INT;
+
+    // cout<<t[n][half_sum] / 2;
+
+
+
     return 0;
 }

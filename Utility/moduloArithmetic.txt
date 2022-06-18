@@ -9,3 +9,7 @@
 
 (a/b) % M = ( (a%M) * (b^(-1)%M) ) %M
 // b^(-1) is modulo multiplicative inverse(MMI) of b
+// Modular Multiplicative Inverse Calculator
+// https://planetcalc.com/3311/
+Example:
+x/2 % (10e9+7) = ((x % (10e9+7)) * (500000004 % (10e9+7))) % (10e9+7)

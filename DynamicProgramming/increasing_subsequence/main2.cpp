@@ -66,32 +66,24 @@ int main()
     cin>>n;
 
     v64 arr(n+1, 0);
+    
 
     for (int i=0; i<n; i++) {
         cin>>arr[i];
     }
+    v64 sorted = arr;
+    sort(sorted.begin(), sorted.end());
 
     vector<vector<int>> t (n+1, vector<int>(n+1, 0));
 
-    int ele = 0;
-    int index = 0;
 
     for (int i=1; i<=n; i++) {
         for (int j=1; j<=n; j++) {
-            if (arr[i-1] == arr[j-1] && arr[i-1] > ele)  {
-                ele = arr[i-1];
+            if (arr[i-1] == sorted[j-1] && sorted[j-1] != sorted[j-2])  {
                 t[i][j]= 1+t[i-1][j-1];
-                index = i-1;
             }
-            else if(arr[i-1] == arr[j-1] && arr[i-1] < ele && index!=0) {
-                ele = arr[j-1];
-                t[i][j] = 1+t[index-1][index-1];
-                index = i-1;
-            }
-            else if (arr[i-1] == arr[j-1] && arr[i-1] < ele && index==0) {
-                ele = arr[j-1];
-                t[i][j] = 1;
-                index = i-1;
+            else if (arr[i-1] == sorted[j-1] && sorted[j-1] == sorted[j-2])  {
+                t[i][j]= t[i-1][j-1];
             }
 
             else {

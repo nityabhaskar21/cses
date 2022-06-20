@@ -62,19 +62,5 @@ int main()
     //    freopen("output.txt", "w", stdout);
     // #endif
 
-    int n;
-    cin>>n;
-
-    v64 start(n, 0);
-    v64 end(n, 0);
-    v64 reward(n, 0);
-
-    for (int i=0; i < n; i++) {
-        cin>>start[i]>>end[i]>>reward[i];
-    }
-
-    
-
-
     return 0;
 }

@@ -13,7 +13,7 @@ The first line contains an integer n: the size of the array.
 After this there are n integers x1,x2,…,xn: the contents of the array.
 
 Output
-
+ 
 Print the length of the longest increasing subsequence.
 
 Constraints

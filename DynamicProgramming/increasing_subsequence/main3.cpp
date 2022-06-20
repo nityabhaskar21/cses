@@ -52,7 +52,7 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
- 
+
 int main()
 {
     fast_cin();
@@ -65,44 +65,39 @@ int main()
     int n;
     cin>>n;
 
-    v64 arr(n+1, 0);
+    v64 arr(n, 0);
     
-
     for (int i=0; i<n; i++) {
         cin>>arr[i];
     }
-    v64 sorted = arr;
-    sort(sorted.begin(), sorted.end());
 
-    vector<vector<int>> t (n+1, vector<int>(n+1, 0));
+    map<ll, ll> m;
 
+    v64 sub_array(n, 1);
 
-    for (int i=1; i<=n; i++) {
-        for (int j=1; j<=n; j++) {
-            if (arr[i-1] == sorted[j-1] && sorted[j-1] != sorted[j-2])  {
-                t[i][j]= 1+t[i-1][j-1];
-            }
-            else if (arr[i-1] == sorted[j-1] && sorted[j-1] == sorted[j-2])  {
-                t[i][j]= t[i-1][j-1];
-            }
-
-            else {
-                t[i][j]= max(t[i-1][j], t[i][j-1]);
-            }
-        }
+    for (int i=0; i<n; i++) {
+        m.insert({arr[i], 1});
     }
-    // cout<<endl;
-    // for (int i=0; i<=n; i++) {
-    //     for (int j=0; j<=n; j++) {
-    //         cout << t[i][j] << " ";
-    //     }
-    //     cout<<endl;
-    // }
+
+    for (int i=1; i<n; i++) {
+
+        auto prev_element = m.lower_bound(arr[i]) ;
+        if (prev_element!=m.end()) {
+            prev_element--;
+            sub_array[i] = prev_element->second+1;
+            m[arr[i]] = sub_array[i];
+        }
+       
+        auto lb = m.upper_bound(arr[i]);
+        if (lb->second == sub_array[i]) {
+            m.erase(lb);
+        }
         
+    }
 
-    cout<<t[n][n];
+    ll max = *max_element(sub_array.begin(), sub_array.end());
 
+    cout<<max;
 
- 
     return 0;
 }

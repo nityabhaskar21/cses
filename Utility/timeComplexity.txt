@@ -55,3 +55,8 @@ input size       required time complexity
     O(n!) This time complexity often indicates that the algorithm iterates through
     all permutations of the input elements. For example, the permutations of
     {1,2,3} are (1,2,3), (1,3,2), (2,1,3), (2,3,1), (3,1,2) and (3,2,1).
+
+
+
+    Notes: 
+    ** Constraint on N (<= 20) (i.e. size of array) hints towards bitmasking + DP.

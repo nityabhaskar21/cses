@@ -51,7 +51,7 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+  
 
 int main()
 {
@@ -61,6 +61,12 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
+    int n, m;
+    cin >> n >> m;
+
+    vector<v64> t (n+1, vector<ll> (m+1, 0));
+
+    
 
     return 0;
 }

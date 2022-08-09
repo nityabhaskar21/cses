@@ -52,8 +52,22 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-void floodfill(vector<vector<char>> t, vector<vector<int>> visited) {
+int[] dx = {0, -1, 0, 1};
+int[] dy = {-1, 0, 1, 0};
 
+void floodfill(vector<vector<char>> t, vector<vector<int>> visited, int i, int j) {
+    visited[i][j] = 1;
+
+    int x = t.size();
+    int y = t[0].size();
+
+    for (int i = 0; i < 4; i++) {
+        int xx = x + dx[i];
+        int yy = y + dy[i];
+        if (i>=0 && i < x && j >=0 && j < y && !visited[xx][yy] && t[xx][yy] == '.') {
+            floodfill(&t, &visited, xx, yy);
+        }
+    }
 }
 
 int main()
@@ -67,7 +81,7 @@ int main()
 
     int n, m;
     cin>>n>>m;
-    vector<vector<char>> t(n, vector<int>(m , ''));
+    vector<vector<char>> t(n, vector<char>(m , ' '));
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -75,8 +89,20 @@ int main()
         }
     }
 
-    int[] dx = {0, -1, 0, 1};
-    int[] dy = {-1, 0, 1, 0};
+    vector<vector<int>> visited(n, vector<int>(m, 0));
+    
+
+    int rooms = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (visited[i][j] == 0 && t[i][j]=='.') {
+                rooms++;
+                floodfill(&t, &visited, i, j);
+            }
+        }
+    }
+    
+    cout << rooms;
 
     return 0;
 }

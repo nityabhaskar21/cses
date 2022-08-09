@@ -64,7 +64,7 @@ void floodfill(vector<vector<char>> &t, vector<vector<int>> &visited, int i, int
     for (int i = 0; i < 4; i++) {
         int xx = x + dx[i];
         int yy = y + dy[i];
-        if (i>=0 && i < x && j >=0 && j < y && !visited[xx][yy] && t[xx][yy] == '.') {
+        if (xx>=0 && xx < x && yy >=0 && yy < y && !visited[xx][yy] && t[xx][yy] == '.') {
             floodfill(t, visited, xx, yy);
         }
     }

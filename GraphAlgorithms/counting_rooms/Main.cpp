@@ -52,8 +52,8 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int[] dx = {0, -1, 0, 1};
-int[] dy = {-1, 0, 1, 0};
+int dx[] = {0, -1, 0, 1};
+int dy[] = {-1, 0, 1, 0};
 
 void floodfill(vector<vector<char>> t, vector<vector<int>> visited, int i, int j) {
     visited[i][j] = 1;

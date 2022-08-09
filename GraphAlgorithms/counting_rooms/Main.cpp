@@ -95,7 +95,7 @@ int main()
     int rooms = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            if (visited[i][j] == 0 && t[i][j]=='.') {
+            if (visited[i][j] != 1 && t[i][j]=='.') {
                 rooms++;
                 floodfill(t, visited, i, j);
             }

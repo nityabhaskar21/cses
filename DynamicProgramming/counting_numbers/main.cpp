@@ -73,6 +73,7 @@ int main()
         while(number>0) {
             if (digit == number%10) {
                 flag = false;
+                break;
             }
             digit = number%10;
             number = number/10;

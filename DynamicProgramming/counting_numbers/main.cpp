@@ -52,15 +52,38 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-
+// TLE - PARTIAL SOLUTION
 int main()
 {
     fast_cin();
 
-    #ifndef ONLINE_JUDGE
-       freopen("input.txt", "r", stdin);
-       freopen("output.txt", "w", stdout);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //    freopen("input.txt", "r", stdin);
+    //    freopen("output.txt", "w", stdout);
+    // #endif
+
+    ll a, b;
+    cin >> a >> b;
+
+    ll count = 0;
+    for (ll i = a; i <= b; i++) {
+        int digit = -1;
+        bool flag = true;
+        ll number = i;
+        while(number>0) {
+            if (digit == number%10) {
+                flag = false;
+            }
+            digit = number%10;
+            number = number/10;
+        }
+
+        if (flag) {
+            count++;
+        }
+    }
+
+    cout << count;
 
     return 0;
 }

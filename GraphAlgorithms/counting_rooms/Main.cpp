@@ -55,15 +55,17 @@ double eps = 1e-12;
 int dx[] = {0, -1, 0, 1};
 int dy[] = {-1, 0, 1, 0};
 
+//ACCEPTED
+
 void floodfill(vector<vector<char>> &t, vector<vector<int>> &visited, int i, int j) {
     visited[i][j] = 1;
 
     int x = t.size();
     int y = t[0].size();
 
-    for (int i = 0; i < 4; i++) {
-        int xx = x + dx[i];
-        int yy = y + dy[i];
+    for (int idx = 0; idx < 4; idx++) {
+        int xx = i + dx[idx];
+        int yy = j + dy[idx];
         if (xx>=0 && xx < x && yy >=0 && yy < y && !visited[xx][yy] && t[xx][yy] == '.') {
             floodfill(t, visited, xx, yy);
         }
@@ -95,14 +97,23 @@ int main()
     int rooms = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            if (visited[i][j] != 1 && t[i][j]=='.') {
+            // cout<<t[i][j]<<" ";
+            if (!visited[i][j] && t[i][j]=='.') {
                 rooms++;
                 floodfill(t, visited, i, j);
             }
         }
+        // cout<<endl;
     }
+    // cout<<endl;
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j < m; j++) {
+    //         cout<<visited[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
     
-    cout << rooms;
+    cout<<rooms;
 
     return 0;
 }

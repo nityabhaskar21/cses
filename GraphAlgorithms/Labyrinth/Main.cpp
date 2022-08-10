@@ -56,10 +56,15 @@ vector<vector<char>> grid;
 vector<vector<int>> visited;
 vector<vector<int>> path_grid;
 
+bool path_found = false;
+
 int n, m;
 
 int dx[] = {0, -1, 0, 1};
 int dy[] = {-1, 0, 1, 0};
+
+int start_i = -1;
+int start_j = -1;
 
 
 int grid_path(int x, int y) {
@@ -75,6 +80,7 @@ int grid_path(int x, int y) {
         int xx = x + dx[i];
         int yy = y + dy[i];
         if (xx>=0 && yy>=0 && xx<n && yy<m && grid[xx][yy] == 'B') {
+            path_found = true;
             visited[xx][yy] = 1;
             path_grid[xx][yy] = 0;
             return path_grid[x][y] = 1;
@@ -107,36 +113,74 @@ int main()
         }
     }
 
+    int min_path;
+
     for (int i = 0; i < n; i++) {
         for (int j = 0; j <m; j++) {
             if (grid[i][j] == 'A') {
-                cout<<grid_path(i, j);
+                start_i = i;
+                start_j = j;
+                min_path = grid_path(i, j);
             }
         }
     }
-    cout<<endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <m; j++) {
-            cout<<grid[i][j]<<" ";
-        }
-        cout<<endl;
-    }
+    // cout<<endl;
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j <m; j++) {
+    //         cout<<grid[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
 
-    cout<<endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <m; j++) {
-            cout<<path_grid[i][j]<<" ";
-        }
-        cout<<endl;
-    }
+    // cout<<endl;
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j <m; j++) {
+    //         cout<<path_grid[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
 
-    cout<<endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <m; j++) {
-            cout<<visited[i][j]<<" ";
-        }
-        cout<<endl;
+    // cout<<endl;
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j <m; j++) {
+    //         cout<<visited[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+    if (path_found == false) {
+        cout<<endl<<"NO";
+    } else {
+        string path = "";
+        int temp_path = path_grid[start_i][start_j];
+        int x = start_i;
+        int y = start_j;
+        do {
+            for (int i = 0; i < 4; i++) {
+                int xx = x + dx[i];
+                int yy = y + dy[i];
+                if (grid[x][y]=='B') break;
+                if (xx>=0 && yy>=0 && xx<n && yy<m && path_grid[xx][yy] == temp_path-1) {
+                    x = x+dx[i];
+                    y = y+dy[i];
+                    // cout<<"temp_path: "<<temp_path<<endl;
+                    temp_path--;
+                    switch(i) {
+                        case 0: path +="L";
+                                break;
+                        case 1: path +="U";
+                                break;
+                        case 2: path +="R";
+                                break;
+                        case 3: path +="D";
+                                break;
+                    }
+
+                }
+            }
+        } while(grid[x][y] != 'B');
+        cout <<"YES"<<endl<<min_path<<endl<<path;
     }
+    
 
     return 0;
 }

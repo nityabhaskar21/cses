@@ -51,7 +51,41 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
+vector<vector<char>> grid;
+vector<vector<int>> visited;
+vector<vector<int>> path_grid;
+
+int n, m;
+
+int dx[] = {0, -1, 0, 1};
+int dy[] = {-1, 0, 1, 0};
+
+
+int grid_path(int x, int y) {
+    visited[x][y] = 1;
+
+    if (path_grid[x][y] != -1) {
+        return path_grid[x][y];
+    }
+
+
+    int min_path = INT_MAX ;
+    for (int i = 0; i < 4; i++) {
+        int xx = x + dx[i];
+        int yy = y + dy[i];
+        if (xx>=0 && yy>=0 && xx<n && yy<m && grid[xx][yy] == 'B') {
+            visited[xx][yy] = 1;
+            path_grid[xx][yy] = 0;
+            return path_grid[x][y] = 1;
+        }
+        if (xx>=0 && yy>=0 && xx<n && yy<m && !visited[xx][yy] && grid[xx][yy]=='.') {
+            min_path = min(min_path, 1+grid_path(xx, yy));
+        }
+    }
  
+    return path_grid[x][y] = min_path;
+}
 
 int main()
 {
@@ -61,6 +95,48 @@ int main()
        freopen("input.txt", "r", stdin);
        freopen("output.txt", "w", stdout);
     #endif
+
+    cin >> n >> m;
+    grid.resize(n, vector<char>(m, ' '));
+    visited.resize(n, vector<int>(m, 0));
+    path_grid.resize(n, vector<int>(m, -1));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <m; j++) {
+            cin>>grid[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <m; j++) {
+            if (grid[i][j] == 'A') {
+                cout<<grid_path(i, j);
+            }
+        }
+    }
+    cout<<endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <m; j++) {
+            cout<<grid[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <m; j++) {
+            cout<<path_grid[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <m; j++) {
+            cout<<visited[i][j]<<" ";
+        }
+        cout<<endl;
+    }
 
     return 0;
 }

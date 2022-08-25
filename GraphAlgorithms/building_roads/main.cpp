@@ -19,6 +19,7 @@
 #include <stack>
 #include <iomanip>
 #include <fstream>
+#include <tuple>
  
 using namespace std;
  
@@ -51,7 +52,21 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+
+class Graph {
+    int n;
+    list<int, int> *edgeList;
+
+    Graph(int n) {
+        this->n = n;
+        edgeList = new list<int, int>[n];
+    }
+
+    void addEdge(int x, int y) {
+        edgeList->push_back(x, y);
+    }
+
+};
 
 int main()
 {
@@ -61,6 +76,10 @@ int main()
     //    freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     // #endif
+
+    int cities , roads;
+
+    cin>>cities>>roads;
 
     return 0;
 }

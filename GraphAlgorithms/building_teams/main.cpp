@@ -51,6 +51,61 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
+class Graph {
+
+    list<int> *l;
+    vector<int> team;
+    vector<bool> visited;
+    int n;
+
+    public:
+        Graph(int n) {
+            this->n = n;
+            l = new list<int>[n+1];
+            team.resize(n+1, -1);
+            visited.resize(n+1, false);
+        }
+
+        void addEdge(int i, int j) {
+            l[i].push_back(j);
+            l[j].push_back(i);
+        }
+
+        void build_team() {
+            int flag = 1;
+            team[1] = 1;
+            visited[1] = true;
+
+            for (int i = 1; i <= n; i++) {
+                build_team_helper(i, flag);
+            }
+
+            for (int i = 1; i <= n; i++) {
+                if (!visited[i]) {
+                    team[i] = flag;
+                }
+            }
+        }
+
+        void build_team_helper(int i, int flag) {
+            for (auto node: l[i]) {
+                if (!visited[node]) {
+                    visited[node] = true;
+                    flag = flag==1?2:1;
+                    team[node] = flag;
+                    build_team_helper(node, flag);
+                }
+            }
+        }
+
+        void printTeam() {
+            for (int i = 1; i < team.size(); i++) {
+                cout << team[i] <<" ";
+            }
+        }
+    
+};
  
 
 int main()
@@ -61,6 +116,20 @@ int main()
        freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     #endif
+
+    int n, m;
+    cin >> n >> m;
+
+    Graph g(n);
+
+    int x, y;
+    for (int i = 1; i <= m; i++) {
+        cin>>x>>y;
+        g.addEdge(x, y);
+    }
+
+    g.build_team();
+    g.printTeam();
 
     return 0;
 }

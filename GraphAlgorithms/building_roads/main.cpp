@@ -53,18 +53,69 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// ACCEPTED
+
 class Graph {
     int n;
-    list<int, int> *edgeList;
+    list<int> *l;
+    vector<bool> visited;
+    vector<pair<int,int>> newEdges;
+    public: 
+        Graph(int n) {
+            this->n = n;
+            l = new list<int>[n+1];
+            visited.resize(n+1, false);
+        }
 
-    Graph(int n) {
-        this->n = n;
-        edgeList = new list<int, int>[n];
-    }
+        void addEdge(int x, int y) {
+            l[x].push_back(y);
+            l[y].push_back(x);
+        }
 
-    void addEdge(int x, int y) {
-        edgeList->push_back(x, y);
-    }
+        void connect_components(int x) {
+            visited[x] = true;
+
+            for (auto node:l[x]) {
+                if (!visited[node]) {
+                    visited[node] = true;
+                    connect_components(node);
+                }
+            }
+        }
+
+        int build_roads() {
+            int ans = 0;
+
+            connect_components(1);
+
+            for (int i = 1; i <= n; i++) {
+                
+                for (auto &node : l[i]) {
+                    if (!visited[node]) {
+                        newEdges.push_back({node, 1});
+                        ans++;
+                        connect_components(node);
+                    }
+                }
+            }
+
+            for (int i = 2; i <= n; i++) {
+                if (!visited[i]) {
+                    ans++;
+                    visited[i] = true;
+                    newEdges.push_back({1, i});
+                }
+            }
+        
+            return ans;
+        }
+
+        void printNewEdges() {
+            cout<<endl;
+            for (int i = 0; i < newEdges.size(); i++) {
+                cout<<newEdges[i].first<<" "<<newEdges[i].second<<endl;
+            }
+        }
 
 };
 
@@ -72,14 +123,26 @@ int main()
 {
     fast_cin();
 
-    // #ifndef ONLINE_JUDGE
-    //    freopen("input.txt", "r", stdin);
+    #ifndef ONLINE_JUDGE
+       freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
-    // #endif
+    #endif
 
     int cities , roads;
 
     cin>>cities>>roads;
+
+    Graph g(cities);
+
+    int x, y;
+    for (int i = 0; i < roads; i++) {
+        cin>>x>>y;
+        g.addEdge(x, y);
+    }
+
+    cout<<g.build_roads();
+    g.printNewEdges();
+
 
     return 0;
 }

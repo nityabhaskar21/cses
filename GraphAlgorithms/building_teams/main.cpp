@@ -52,6 +52,8 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+//PARTIAL
+
 class Graph {
 
     list<int> *l;
@@ -89,10 +91,11 @@ class Graph {
         }
 
         void build_team_helper(int i, int flag) {
+            flag = flag==1?2:1;
             for (auto node: l[i]) {
                 if (!visited[node]) {
                     visited[node] = true;
-                    flag = flag==1?2:1;
+                    
                     team[node] = flag;
                     build_team_helper(node, flag);
                 }

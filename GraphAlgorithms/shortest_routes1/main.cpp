@@ -51,6 +51,56 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
+// ACCEPTED
+
+class Graph {
+    int n;
+    list<pair<ll,ll>> *l;
+
+    public:
+        Graph(int n) {
+            this->n = n;
+            this->l = new list<pair<ll,ll>>[n+1];
+        }
+
+        void addEdge(int x, int y, ll w) {
+            l[x].push_back({y, w});
+            // l[y].push_back({x, w});      Since flight is 1 way so directed graph only.
+        }
+
+        void shortestPath() {
+            vector<ll> distance(n+1, LONG_MAX);
+
+            set<pair<ll,ll>> s;       //pair<weight, node>
+            s.insert({0, 1});
+            distance[1] = 0;
+
+            while(!s.empty()) {
+                auto it = s.begin();
+                int node = it->second;
+                ll weightTill = it->first;
+                s.erase(it);
+
+                for (auto nbr: l[node]) {
+                    if (weightTill+nbr.second < distance[nbr.first]) { 
+                        auto it2 = s.find({distance[nbr.first], nbr.first});
+                        if (it2 != s.end() ) {
+                            s.erase(it2);
+                        }
+
+
+                        distance[nbr.first] = weightTill+nbr.second;
+                        s.insert(make_pair(distance[nbr.first], nbr.first));
+                    }
+                }
+            }
+           for (int i = 1; i <= n; i++) {
+                cout<<distance[i]<<" ";
+           }
+
+        }
+};
  
 
 int main()
@@ -61,6 +111,20 @@ int main()
        freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     #endif
+
+    int cities, no_flights;
+    cin>>cities>>no_flights;
+
+    Graph g(cities);
+
+    int x, y;
+    ll w;
+    for (int i = 0; i < no_flights; i++) {
+        cin>>x>>y>>w;
+        g.addEdge(x, y, w);
+    }
+
+    g.shortestPath();
 
     return 0;
 }

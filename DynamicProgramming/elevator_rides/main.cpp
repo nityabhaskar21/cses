@@ -19,7 +19,7 @@
 #include <stack>
 #include <iomanip>
 #include <fstream>
- 
+  
 using namespace std;
  
 typedef long long ll;
@@ -71,11 +71,12 @@ int main()
     for (int i = 0; i <n; i++) {
         cin>>weights[i];
     }
+    sort(weights.rbegin(), weights.rend());
 
     vector<vector<int>> t(n+1, vector<int>(x+1, 0));
 
     for (int i = 0; i <= n; i++) {
-        for (int j = 0; j <= n; j++) {
+        for (ll j = 0; j <= x; j++) {
             if (i== 0 || j == 0) {
                 t[i][j] = 0;
             }
@@ -83,10 +84,16 @@ int main()
     }
 
     for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-           
+        for (ll j = 1; j <= x; j++) {
+           if (weights[i-1] <= j) {
+                t[i][j] = t[i-1][j-weights[i-1]] ? t[i-1][j-weights[i-1]]: 1 ;
+           } else {
+                t[i][j] = 1+t[i-1][weights[i-1]];
+           }
         }
     }
+
+    cout<<t[n][x];
 
 
     return 0;

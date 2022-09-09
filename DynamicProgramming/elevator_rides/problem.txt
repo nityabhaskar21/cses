@@ -10,7 +10,7 @@ the number of people and the maximum allowed weight in the elevator.
 The second line has n integers w1,w2,…,wn: the weight of each person.
 
 Output
-
+ 
 Print one integer: the minimum number of rides.
 
 Constraints

@@ -51,7 +51,32 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+
+ll find_pos_helper(ll index, vector<ll> &circle, ll k, ll rounds) {
+    if (index >= circle.size()) {
+        return circle[0];
+    }
+    if (rounds == k) {
+        return circle[index];
+    }
+    
+    auto it = circle.begin() + index;
+    circle.erase(it);
+    if (circle.size() == 1) {
+        return circle[0];
+    }
+
+    index = (index+1) % (circle.size());
+    return find_pos_helper(index, circle, k, rounds+1);
+}
  
+ll find_pos(ll n, ll k) { 
+    vector<ll> circle(n);
+    for (ll i = 0; i < n; i++) {
+        circle[i] = i+1;
+    }
+    return find_pos_helper(1, circle, k, 1);
+}
 
 int main()
 {
@@ -61,6 +86,15 @@ int main()
        freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     #endif
+
+    int queries = 0;
+    cin>>queries;
+
+    ll n, k;
+    for (ll i = 0; i < queries; i++) {
+        cin>>n>>k;
+        cout<<find_pos(n, k)<<endl;
+    }
 
     return 0;
 }

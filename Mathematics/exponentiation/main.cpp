@@ -52,13 +52,14 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// ACCEPTED
 ll binaryExponent(ll a, ll b) {
     if (b == 0) return 1;
     ll res = binaryExponent(a, b/2) % MOD_INT;
     if (b&1) {
-        return ((a) * (res) * (res)) % MOD_INT;
+        return (a * ((res * res) % MOD_INT)) % MOD_INT;
     } else {
-        return ((res) * (res)) % MOD_INT;
+        return (res * res) % MOD_INT;
     }
 }
  

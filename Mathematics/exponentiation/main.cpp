@@ -54,11 +54,11 @@ double eps = 1e-12;
 
 ll binaryExponent(ll a, ll b) {
     if (b == 0) return 1;
-
+    ll res = binaryExponent(a, b/2);
     if (b&1) {
-        return ((a) * (binaryExponent(a, b/2) ) * (binaryExponent(a, b/2) )) % MOD_INT;
+        return ((a) * (res ) * (res )) % MOD_INT;
     } else {
-        return ((binaryExponent(a, b/2))* (binaryExponent(a, b/2))) % MOD_INT;
+        return ((res)* (res)) % MOD_INT;
     }
 }
  

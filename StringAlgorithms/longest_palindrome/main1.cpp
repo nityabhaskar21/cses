@@ -52,9 +52,59 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-string longest_palindrome(string s) {
+//RUNTIME ERROR
 
-    return "";
+string longest_palindrome(string s) {
+    int len = s.length();
+    string rev = s;
+    reverse(rev.begin(), rev.end());
+    // cout<<"str: "<<s;
+
+    vector<vector<int>> v(len+1, vector<int>(len+1, 0));
+    int maxLength = 0;
+    int endIndex = len-1;
+
+    for (int i = 1; i < len+1; i++) {
+        for (int j = 1; j < len+1; j++) {
+            if (s[i-1] == rev[j-1]) {
+                v[i][j] = 1 + v[i-1][j-1];
+                if (v[i][j] > maxLength) {
+                    maxLength = v[i][j];
+                    endIndex = i;
+                }
+            } else {
+                v[i][j] = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i <= len; i++) {
+        for (int j = 0; j <= len; j++) {
+            cout<<v[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+
+    string palindrome = "";
+
+    // int i = len;
+    // int j = len;
+
+
+    // while (i > 0 && j > 0) {
+    //     if (s[i-1] == rev[j-1]) {
+    //         palindrome =s[i-1] + palindrome;
+    //         i--;
+    //         j--;
+    //     } else if (v[i-1][j] > v[i][j-1]) {
+    //         i--;
+    //     } else {
+    //         j--;
+    //     } 
+    // }
+    palindrome = s.substr(endIndex - maxLength, maxLength);
+    return palindrome;
 }
  
 
@@ -68,8 +118,9 @@ int main()
     #endif
 
     string s;
-    cin>>s;
+    getline(cin, s);
 
+    // cout<<"lps :";
     cout<<longest_palindrome(s);
 
     return 0;

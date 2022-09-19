@@ -51,7 +51,32 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+
+// ACCEPTED
+int change(int amount, vector<int>& coins) {
+    int coinSize = coins.size();
+    vector<vector<int>> v(coinSize+1, vector<int>(amount+1, 0));
+    
+    for (int i = 0; i <=coinSize; i++) {
+        for (int j = 0; j<=amount; j++) {
+            if (j==0) {
+                v[i][j] = 1;
+            }
+        }
+    }
+    
+    for (int i = 1; i <=coinSize; i++) {
+        for (int j = 1; j<=amount; j++) {
+            if (coins[i-1] <= j) {
+                v[i][j] = (v[i-1][j] + v[i][j-coins[i-1]]) % MOD_INT;
+            } else {
+                v[i][j] = v[i-1][j];
+            }
+        }
+    }
+    
+    return v[coinSize][amount] ;
+}
 
 int main()
 {
@@ -61,6 +86,16 @@ int main()
        freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     #endif
+    int n;
+    int x;
+    cin>> n >> x;
+
+    vector<int> coins(n, 0);
+
+    for (int i = 0; i < n; i++) {
+        cin >> coins[i];
+    }
+    cout<< change(x, coins);
 
     return 0;
 }

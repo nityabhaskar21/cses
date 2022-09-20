@@ -82,7 +82,7 @@ string find_longest_palindrome(string str) {
     for (int i = 1; i < updatedLen - 1; i++) {
         if (i < knownRange) {
             int mirrorIndex = center - (i - center);
-            lps[i] = min(lps[mirrorIndex], knownRange - 1);
+            lps[i] = min(lps[mirrorIndex], knownRange - i);
         }
         
         while (updatedStr[i-(lps[i] + 1)] == updatedStr[i+(lps[i] + 1)]) {

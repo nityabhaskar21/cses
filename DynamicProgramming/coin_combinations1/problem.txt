@@ -21,7 +21,7 @@ The second line has n distinct integers c1,c2,…,cn: the value of each coin.
 
 Output
 
-Print one integer: the number of ways modulo 109+7.
+Print one integer: the number of ways modulo 10^9+7.
 
 Constraints
 1≤n≤100

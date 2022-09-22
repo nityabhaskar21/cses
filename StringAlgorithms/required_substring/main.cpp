@@ -51,7 +51,16 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+
+ll binaryExponent(ll a, ll b) {
+    if (b == 0) return 1;
+    ll res = binaryExponent(a, b/2) % MOD_INT;
+    if (b&1) {
+        return (a * ((res * res) % MOD_INT)) % MOD_INT;
+    } else {
+        return (res * res) % MOD_INT;
+    }
+}
 
 int main()
 {
@@ -61,6 +70,14 @@ int main()
        freopen("input.txt", "r", stdin);
     //    freopen("output.txt", "w", stdout);
     #endif
+
+    int len;
+    string str;
+    cin>>len>>str;
+
+    ll power = binaryExponent(26, len-str.length()) ;
+
+    cout<<(power+(len-str.length())*power) % MOD_INT;
 
     return 0;
 }

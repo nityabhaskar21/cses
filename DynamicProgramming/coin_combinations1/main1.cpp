@@ -52,15 +52,17 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int coin_combinations(v32 &coins, int sum) {
+//TLE 
+
+int coin_combinations(v32 coins, int sum) {
     vector<int> ways(sum+1, 0);
     ways[0] = 1;
+    sort(coins.begin(), coins.end());
 
     for (int i=1; i<=sum; i++) {
-        for (int j = 0; j < coins.size(); j++) {
-            if (coins[j] <= i) {
-                ways[i] = (ways[i]+ways[i-coins[j]])% MOD_INT;
-            }
+        int j = 0;
+        for (j = 0; (j<coins.size()) && (coins[j]<=i); j++) {
+            ways[i] = (ways[i]+ways[i-coins[j]])% MOD_INT;
         }
     }
     return ways[sum];

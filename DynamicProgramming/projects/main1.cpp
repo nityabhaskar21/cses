@@ -52,34 +52,34 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-// TLE
-int n;
+// ACCEPTED
+ll n;
 
 struct project {
-    int st; int ed; ll re;
+    int st, ed, re;
 };
 
 bool cmp (project &p1, project &p2) {
     return p1.ed < p2.ed;
 }
-
+vector<int> endArray;  
 int findLastIndex(vector<project> &arr, int i) {
-    vector<int> endArray;
-    for (int j = 0; j < arr.size(); j++) {
-        endArray.push_back(arr[j].ed);
-    }
-
+    
     auto it = lower_bound(endArray.begin(), endArray.end(), arr[i].st);
     if (it == endArray.begin()) {
         return 0;
     }
-    auto val = ((--it) - endArray.begin())+1;
-    return val ;
+    it--;
+    return distance(endArray.begin(), it)+1;
 }
 
 ll solve(vector<project> &arr) {
     ll v[n+1];
     v[0] = 0;
+
+    for (int j = 0; j < arr.size(); j++) { //DONT DO THIS WORK INSIDE findLastIndex AS IT WILL GET CALLED FOR EACH CALL.
+        endArray.push_back(arr[j].ed);
+    }
 
     for (int i = 1; i <= n; i++) {
         ll opt1 = v[i-1];

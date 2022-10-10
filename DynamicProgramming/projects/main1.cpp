@@ -52,35 +52,50 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// TLE
 int n;
 
 struct project {
-    int st; int ed; int re;
+    int st; int ed; ll re;
 };
 
 bool cmp (project &p1, project &p2) {
     return p1.ed < p2.ed;
 }
 
-int findLast(vector<project> &arr, int i) {
-    
+int findLastIndex(vector<project> &arr, int i) {
+    vector<int> endArray;
+    for (int j = 0; j < arr.size(); j++) {
+        endArray.push_back(arr[j].ed);
+    }
+
+    auto it = lower_bound(endArray.begin(), endArray.end(), arr[i].st);
+    if (it == endArray.begin()) {
+        return 0;
+    }
+    auto val = ((--it) - endArray.begin())+1;
+    return val ;
 }
 
 ll solve(vector<project> &arr) {
-    int v[n+1];
+    ll v[n+1];
     v[0] = 0;
 
     for (int i = 1; i <= n; i++) {
         ll opt1 = v[i-1];
-        ll opt2 = arr[i].re;
+        ll opt2 = arr[i-1].re;
 
-        //find largest j such that j.ed <= i.st
-        int j = findLast(v, i);
+        // find largest j such that j.ed < i-1.st
+        // end day of one task cannot be starting day of any other task.
+        int j = findLastIndex(arr, i-1);
 
         opt2 += v[j];
         v[i] = max(opt1, opt2);
     }
-
+    // for (int i = 0; i <= n; i++) {
+    //     cout<<v[i]<<" ";
+    // }
+    // cout<<endl;
     return v[n];
 }
 
@@ -96,14 +111,14 @@ int main()
 
     cin >> n;
 
-    vector<project> arr;
+    vector<project> arr(n);
 
     for (int i = 0; i < n; i++) {
         cin>>arr[i].st>>arr[i].ed>>arr[i].re;
     }
     sort (arr.begin(), arr.end(), cmp);
 
-    cout<<solve(v);
+    cout<<solve(arr);
     
     return 0;
 }
